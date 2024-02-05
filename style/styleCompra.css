@@ -1,0 +1,22 @@
+.btn2{
+	background-color: #106cff;
+    outline: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    width: 100%;
+    border-radius: 2rem;
+    padding: 5px;
+    transition: .5s;
+}
+h2{
+    font: normal 25px Verdana, Geneva, sans-serif;
+}
+p{
+    font: bold 15px Verdana, Geneva, sans-serif;
+    color: #868686;
+}
+h3{
+    font: bold 35px Verdana, Geneva, sans-serif;
+    color: #106cff;
+}
