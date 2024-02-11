@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded',()=>{
                 <a class="nav-link" href="./eliminar.php">Eliminar</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="./bitacora.php">Bitacora</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">${usuario}</a>
             </li>
             <li class="nav-item">

@@ -17,14 +17,18 @@ http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         $contra=$_POST['contra'];
 
         require 'conexionPrincipal.php';
-            $Administrador = mysqli_query($conexion, "SELECT * FROM `administracion`WHERE `User` = '$User' AND `Pass` = '$contra';");
-            $Resultado = mysqli_query($conexion, "SELECT * FROM `user`WHERE `User` = '$User' AND `Pass` = '$contra';");
+            $Administrador = mysqli_query($conexion, "SELECT `id_admin` FROM `administracion`WHERE `User` = '$User' AND `Pass` = '$contra';");
+            $Resultado = mysqli_query($conexion, "SELECT `id_user` FROM `user`WHERE `User` = '$User' AND `Pass` = '$contra';");
             if(mysqli_num_rows ($Administrador) == 1){
                 $_SESSION["admin"] = "$User";
+                $row = mysqli_fetch_row($Administrador);
+                $_SESSION["idUser"] = $row[0];
                 echo "<script> alert ('Bienvenido $User'); window.location='../index.php'</script> ";
             }
             else if (mysqli_num_rows ($Resultado)==1){
                 $_SESSION["user"] = "$User";
+                $row = mysqli_fetch_row($Resultado);
+                $_SESSION["idUser"] = $row[0];
                 echo "<script> alert ('Bienvenido $User'); window.location='../index.php'</script> ";
             }
             else{

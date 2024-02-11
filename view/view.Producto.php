@@ -7,7 +7,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/Logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css%22%3E">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -85,6 +85,35 @@ session_start();
             }
         }
     ?>
+    <div class="contenedorPreguntas">
+        <div class="preguntasProducto textoCentrado">
+            <h2>Preguntas acerca del producto</h3>
+        </div>
+        <div class="pregutas">
+            <?php
+            $queryPreguntas = mysqli_query($conexion, "SELECT * FROM `preguntas` WHERE `id_producto_cata` = '$id'");
+            while($row = mysqli_fetch_array($queryPreguntas)){
+                echo'
+                <div class="separacionPregunta">
+                    <div class="mb-3">
+                        <label for="NombreUser" class="form-label">'.$row['nombre_user'].'</label>
+                        <textarea class="form-control" rows="3">'.$row['pregunta'].'</textarea>
+                    </div>
+                </div>
+                ';
+            }
+            ?>
+            <form action="../php/agregarPregunta.php?id=<?php echo $id?>" method="POST">
+                <div class="separacionPregunta centrarBoton">
+                    <h5>Escribe tu pregunta</h5>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="preguntaPersonal" rows="3" name="pregunta" required></textarea>
+                    </div>
+                    <button class="btn3" type="submit">Subir Pregunta</button>
+                </div>
+            </form>
+        </div>
+    </div>
     
 
 

@@ -7,7 +7,7 @@ let articulosPagar=[];
 
 cargarEventListener()
 function cargarEventListener(){
-    pagar.addEventListener('click', procesoPago);
+    pagar.addEventListener('click', generarPDF);
 }
 
 imprimirDatos();
@@ -32,6 +32,37 @@ function imprimirDatos(){
 
 }
 
+function generarPDF(){
+    const carrito = JSON.stringify({datos: datosStorage});
+    fetch('./pdf.php',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: carrito
+    }).then(response => response.text()).then(data =>{
+        generarCompra();
+    }).catch (error=> console.error(error));
+}
+
+function generarCompra(){
+    let infoCompra = [];
+    datosStorage.forEach(precios => {
+        const infoTotalPagar ={
+            Precio: precios.Precio,
+            Cantidad: precios.Cantidad 
+        };
+        infoCompra = [...infoCompra, infoTotalPagar];
+    });
+    let detallesPrecio = JSON.stringify({datos: infoCompra});
+    fetch('./php/generarCompra.php',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: detallesPrecio
+    }).then(response => response.text()).then(data => {
+        console.log(data);
+        procesoPago();
+    }).catch(error => console.error(error))
+}
+
 function procesoPago(){
     console.log('pago');
     datosStorage.forEach(carrito => {
@@ -42,13 +73,13 @@ function procesoPago(){
         };
         articulosPagar = [...articulosPagar,infoPagar];
     });
-    enviarPago(articulosPagar);
+    generarTicket(articulosPagar);
 }
-function enviarPago(articulos){
+function generarTicket(articulos){
     console.log(JSON.stringify(articulos));
     let articulosFinales = [];
     articulosFinales = JSON.stringify({datos: articulos});
-    fetch('./php/subirPago.php',{
+    fetch('./php/crearTicket.php',{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: articulosFinales
@@ -56,8 +87,19 @@ function enviarPago(articulos){
         console.log(data);
         if(data ==='Se realizo la compra correctamente'){
             localStorage.removeItem('carrito');
-            alert(data);
+            generarCorreo();    
+            alert(data+", se le enviara un correo con su recibo de compra");
             window.location='./index.php'
         }
     }).catch (error=> console.error(error));
+}
+
+function generarCorreo(){
+    fetch ('./php/generarCorreo.php',{
+        method: 'POST',
+        headers: {'Content-type': 'application/x-www-form-urlencoded'}
+    }).then(response => response.text()).then(data => {
+        console.log(data);
+        
+    }).catch(error => console.error(error));
 }
