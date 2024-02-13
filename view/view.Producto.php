@@ -11,8 +11,11 @@ session_start();
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css%22%3E">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <link rel="stylesheet" type="text/css" href="../style/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../style/styleFooter.css">
 	<link rel="stylesheet" type="text/css" href="../style/styleCompra.css">
+    <link rel="stylesheet" type="text/css" href="../style/carrito.css">
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
     <title>Agregar producto</title>
 </head>
 
@@ -41,51 +44,59 @@ session_start();
                     <div class="submenu">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <div id="carrito">
-                            <table id="lista-carrito" class="u-full-width">
-                                <thead>
-                                    <tr>
-                                        <th>Imagen</th>
-                                        <th>Nombre</th>
-                                        <th>Precio</th>
-                                        <th>Cantidad</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                            <a href="#" id="vaciar-carrito" class="btn btn-secondary boton">Vaciar Carrito</a>
-                            <a href="../pagar.php" id="Pagar-carrito" class="btn btn-primary boton">Pagar Carrito</a>
+                            <div class="acomodo_carrito">
+                                <table id="lista-carrito" class="u-full-width">
+                                    <thead>
+                                        <tr>
+                                            <th>Imagen</th>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th>Cantidad</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div class="row_search">
+                                    <a href="#" id="vaciar-carrito" class="btn btn-secondary boton">Vaciar Carrito</a>
+                                    <a href="./pagar.php" id="Pagar-carrito" class="btn btn-primary boton">Pagar Carrito</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <?php
-        if (isset($_GET['id'])){
-            $id = $_GET['id'];
-            require '../php/conexionPrincipal.php';
-			$Resultado = mysqli_query($conexion, "SELECT * FROM `productos_catalogo` WHERE `id_producto` = '$id';");
-			while($row = mysqli_fetch_array($Resultado)){
-            echo'<div class="contCarrito" style="display: grid;grid-template-columns: repeat(2, 30rem);grid-auto-rows: 500px;margin: 50px 200px;padding: 0 200px 0 300px;">
-                	<div class="imgIzquierda">
-	                    <img src="../img/'.$row['img'].'" alt="Producto" style="width: 100%;height: 400px;">
-    	            </div>
-        	        <div class="InformacionCompra" id="Producto">
-            	    	<h2>'.$row['Nombre'].'</h3>
-                	    <p id="descripccion">'.$row['Descripccion'].'</p>
-						<br>
-                    	<h3>'.$row['Precio'].'$</h3>
-                        <p>Cantidad <input type="number" name = "Cantidad" size ="3" max = "'.$row['Cantidad'].'" min = "1"value="1" ></p>
-						<br>';
-						echo'<a href="#"><input type="submit" class="btn2" value = "Agregar al carrito" data-id="'.$_GET['id'].'"></a>';
-						
-            	    echo'</div>
-            </div>';
+
+    <div class="contenedor_carrito">
+        <?php
+            if (isset($_GET['id'])){
+                $id = $_GET['id'];
+                require '../php/conexionPrincipal.php';
+                $Resultado = mysqli_query($conexion, "SELECT * FROM `productos_catalogo` WHERE `id_producto` = '$id';");
+                while($row = mysqli_fetch_array($Resultado)){
+                echo'<div class="contCarrito">
+                        <div class="division_40">
+                            <img src="../img/'.$row['img'].'" alt="Producto" style="width: 100%;height: 400px;">
+                        </div>
+                        <div class="division_60" id="Producto">
+                            <h2>'.$row['Nombre'].'</h3>
+                            <p id="descripccion">'.$row['Descripccion'].'</p>
+                            <br>
+                            <h3>'.$row['Precio'].'$</h3>
+                            <p>Cantidad <input type="number" name = "Cantidad" size ="3" max = "'.$row['Cantidad'].'" min = "1"value="1" ></p>
+                            <br>';
+                            echo'<a href="#"><input type="submit" class="btn btn-primary" value = "Agregar al carrito" data-id="'.$_GET['id'].'"></a>';
+                            
+                        echo'</div>
+                </div>';
+                }
             }
-        }
-    ?>
-    <div class="contenedorPreguntas">
+        ?>
+        
+        <hr>
+
         <div class="preguntasProducto textoCentrado">
             <h2>Preguntas acerca del producto</h3>
         </div>
@@ -114,9 +125,6 @@ session_start();
             </form>
         </div>
     </div>
-    
-
-
 
 
 <!-- <?php
