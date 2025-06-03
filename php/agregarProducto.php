@@ -14,6 +14,7 @@ $provedor = $_POST['proveedor'];
 $descripccion =$_POST['descripccion'];
 $cantidad =$_POST['cantidad'];
 $precio =$_POST['precio'];
+
 $nombreImagen = $_FILES["imagen"]["name"];
 $tipoimagen = $_FILES["imagen"]["type"];
 $extensionesPermitidas = array("jpeg", "jpg", "png");

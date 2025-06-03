@@ -59,7 +59,7 @@ session_start();
                                 </table>
                                 <div class="row_search">
                                     <a href="#" id="vaciar-carrito" class="btn btn-secondary boton">Vaciar Carrito</a>
-                                    <a href="./pagar.php" id="Pagar-carrito" class="btn btn-primary boton">Pagar Carrito</a>
+                                    <a href="http://localhost/GlobalWebI/pagar.php" id="Pagar-carrito" class="btn btn-primary boton">Pagar Carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@ session_start();
                             <h3>'.$row['Precio'].'$</h3>
                             <p>Cantidad <input type="number" name = "Cantidad" size ="3" max = "'.$row['Cantidad'].'" min = "1"value="1" ></p>
                             <br>';
-                            echo'<a href="#"><input type="submit" class="btn btn-primary" value = "Agregar al carrito" data-id="'.$_GET['id'].'"></a>';
+                            echo'<a href="#"><input type="submit" class="btn btn-primary referencia" value = "Agregar al carrito" data-id="'.$_GET['id'].'"></a>';
                             
                         echo'</div>
                 </div>';
@@ -125,43 +125,6 @@ session_start();
             </form>
         </div>
     </div>
-
-
-<!-- <?php
-	// if(isset($_POST['btnAgregar'])){
-	// 	$id = $_GET['id'];
-	// 	$Cantidad = $_POST['Cantidad'];
-    //     $conexion = mysqli_connect("proyectosinformaticatnl.ceti.mx","bdtecnology","74649e1eb") or die ("Error en la conexion de la base de datos ");
-	// 	mysqli_select_db($conexion,"bdtecnology") or die ("Error en la base de datos");
-	// 	$Resultado = mysqli_query($conexion, "SELECT * FROM bdtecnology.`Productos` WHERE `ID_p` = '$id';");			
-	// 	while($row = mysqli_fetch_array($Resultado)){
-	// 		$nombre = $row['Nombre_p'];
-	// 		$Precio = $row['Precio_p'];
-	// 	}
-    // 	$SubTotal = $Precio*$Cantidad;
-	//     $fechaHora = date("F_j_Y");
-	//     $pedido = array();
-    // 	$ruta= "Json/".$_SESSION['usua'].$fechaHora."_pedido.json";
-	//     if (file_exists($ruta)){
-    //     	$archivo = file_get_contents($ruta);
-    // 	    $pedido = json_decode($archivo,true);
-	//         $pedido[]=array('id'=>$id,'nombre'=>$nombre,'precio'=>$Precio,'cantidad'=>$Cantidad,'subtotal'=>$SubTotal);
-    //     	$json_string = json_encode($pedido);
-    //     	echo $json_string;
-    // 	    $file = $ruta;
-	//         file_put_contents($file,$json_string);
-    //     	echo "<script> alert ('Se agrego correctamente al carrito'); window.location='index.php'</script>";
-    // 	}
-	//     else{
-    //     	$pedido[]=array('id'=>$id,'nombre'=>$nombre,'precio'=>$Precio,'cantidad'=>$Cantidad,'subtotal'=>$SubTotal);
-	//         $json_string = json_encode($pedido);
-    // 	    echo $json_string;
-    //     	$file = $ruta;
-    // 	    file_put_contents($file,$json_string);
-	//         echo "<script> alert ('Se agrego correctamente al carrito'); window.location='index.php'</script>";
-    // 	}
-	// }
-?> -->
     <footer>
         <script src="../js/indexSesion.js"></script>
         <script src="../js/carrito.js"></script>

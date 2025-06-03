@@ -27,7 +27,7 @@ function cargarEventListener(){
 }
 
 function agregarCurso(e){
-    if(e.target.classList.contains('btn2')){
+    if(e.target.classList.contains('referencia')){
         const productoSeleccionado =e.target.parentElement.parentElement.parentElement;
         leerDatosProducto(productoSeleccionado);
     }
@@ -45,7 +45,7 @@ function eliminarProducto(e){
 
 function leerDatosProducto(product){
     const infoProduct ={
-        id: product.querySelector('.btn2').getAttribute('data-id'),
+        id: product.querySelector('.referencia').getAttribute('data-id'),
         img: product.querySelector('img').src.replace(/%20/g, " "),
         Nombre: product.querySelector('h2').textContent,
         Precio: product.querySelector('h3').textContent,
@@ -86,3 +86,4 @@ function limpiarCarritoHTML(){
     }
     guardarStorage();
 }
+
