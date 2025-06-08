@@ -1,4 +1,3 @@
 <?php
-    $conexion = mysqli_connect("server-dbtecnolgoy.mysql.database.azure.com","dbtecnology","@2025drako") or die ("Error en la conexion de la base de datos ");
-    mysqli_select_db($conexion,"bdtecnology") or die ("Error en la base de datos");
-?>
+    $con = mysqli_init();
+    mysqli_real_connect($conn, "server-dbtecnolgoy.mysql.database.azure.com", "dbtecnology", "@2025drako", "bdtecnology", 3306, MYSQLI_CLIENT_SSL);
